@@ -223,6 +223,45 @@ class exponent(expression):
 ### Functions -- single input###
 # These MUST account for the chain rule.
 # They also aren't called via overrides, meaning that they should handle casts to constant if need be.
+
+
+# class linear_activation
+# An example class of what you'll be implementing
+class linear(expression):
+    def __init__(self, first):
+        """Linear activation function.
+
+        Args:
+            first (expression): an expression
+        """
+        self.first = constant(first) if isinstance(first, (int, float)) else first
+
+    def eval(self, values):
+        return self.first.eval(values)
+
+    def diff(self, values, diffto):
+        # chain rule
+        return self.first.diff(values, diffto)
+
+
+class step:
+    def __init__(self, first):
+        """Step activation function.
+
+        Args:
+            first (expressions): an expression
+        """
+        self.first = constant(first) if isinstance(first, (int, float)) else first
+
+    def eval(self, values):
+        # TODO: Implement eval()
+        return 0
+
+    def diff(self, values, diffto):
+        # TODO: Implement diff()
+        return 0
+
+
 class natlog(expression):
     def __init__(self, first):
         """Natural log of an expression.
@@ -233,12 +272,12 @@ class natlog(expression):
         self.first = constant(first) if isinstance(first, (int, float)) else first
 
     def eval(self, values):
-        # TODO: Implement eval() for natlog
+        # TODO: Implement eval()
         return 0
 
     def diff(self, values, diffto):
         # chain rule
-        # TODO: Implement diff() for natlog
+        # TODO: Implement diff()
         return 0
 
 
@@ -385,19 +424,21 @@ class leaky_relu(expression):
         return 0
 
 
-# class linear_activation
-class linear(expression):
+# BONUS: Swish
+class swish:
     def __init__(self, first):
-        """Linear activation function.
+        """Step activation function.
 
         Args:
-            first (expression): an expression
+            first (expressions): an expression
         """
         self.first = constant(first) if isinstance(first, (int, float)) else first
 
     def eval(self, values):
-        return self.first.eval(values)
+        # TODO: Implement eval()
+        return 0
 
     def diff(self, values, diffto):
         # chain rule
-        return self.first.diff(values, diffto)
+        #  TODO: Implement diff()
+        return 0
