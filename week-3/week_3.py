@@ -244,6 +244,23 @@ class linear(expression):
         return self.first.diff(values, diffto)
 
 
+class natlog(expression):
+    def __init__(self, first):
+        """Natural log of an expression.
+
+        Args:
+            first (expression): an expression
+        """
+        self.first = constant(first) if isinstance(first, (int, float)) else first
+
+    def eval(self, values):
+        return math.log(self.first.eval(values))
+
+    def diff(self, values, diffto):
+        # chain rule
+        return 1 / self.first.eval(values) * self.first.diff(values, diffto)
+
+
 class step:
     def __init__(self, first):
         """Step activation function.
@@ -258,25 +275,6 @@ class step:
         return 0
 
     def diff(self, values, diffto):
-        # TODO: Implement diff()
-        return 0
-
-
-class natlog(expression):
-    def __init__(self, first):
-        """Natural log of an expression.
-
-        Args:
-            first (expression): an expression
-        """
-        self.first = constant(first) if isinstance(first, (int, float)) else first
-
-    def eval(self, values):
-        # TODO: Implement eval()
-        return 0
-
-    def diff(self, values, diffto):
-        # chain rule
         # TODO: Implement diff()
         return 0
 
