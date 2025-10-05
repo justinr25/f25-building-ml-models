@@ -425,7 +425,7 @@ class leaky_relu(expression):
 # BONUS: Swish
 class swish:
     def __init__(self, first):
-        """Step activation function.
+        """Swish activation function.
 
         Args:
             first (expressions): an expression
