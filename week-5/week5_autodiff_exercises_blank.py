@@ -36,42 +36,48 @@ def exercise_4():
     # This is another way to work with the constants -- you can use them directly in expressions (no need to define constants using the constants class).
 
 
-### The rest of these exercises are for you to complete! ###
-# 5. Create the expression: (x^2 + 2x + 1)
+# 5. Using the epxression created in exercise_4, differentiate it with respect to x
 def exercise_5():
+    return exercise_4().diff({"x": -1}, "x")
+    # diff() takes a dictionary of variables names and their corresponding values, and the variable name which you differentiate with respect to
+
+
+### The rest of these exercises are for you to complete! ###
+# 6. Create the expression: (x^2 + 2x + 1)
+def exercise_6():
     x = None  # TODO: replace None with your code for the variable 'x'.
     return None  # TODO: replace None with a completed expression.
 
 
-# 6. Create the expression: x^3 + 3y^2 + 3x + 1. Evaluate it at x = 10, y = 5.
-def exercise_6():
+# 7. Create the expression: x^3 + 3y^2 + 3x + 1. Evaluate it at x = 10, y = 5.
+def exercise_7():
     x = None  # TODO: replace None with your code for the variable 'x'.
     y = None  # TODO: replace None with your code for the variable 'y'.
     return None  # TODO: replace None with a completed expression, evaluated at x = 10, y = 5.
 
 
-# 7. Create the expression: sin(x)^2 + cos(x)^2. Evaluate it at any x you want.
-def exercise_7():
+# 8. Create the expression: sin(x)^2 + cos(x)^2. Evaluate it at any x you want.
+def exercise_8():
     x = None  # TODO: replace None with your code for the variable 'x'.
     return None  # TODO: replace None with a completed expression, evaluated at any x you want.
 
 
-# 8 Create the expression: x^2 + 3x + 2. Compute its derivative with respect to x, and evaluate the derivative at x = 5.
-def exercise_8():
+# 9. Create the expression: x^2 + 3x + 2. Compute its derivative with respect to x, and evaluate the derivative at x = 5.
+def exercise_9():
     x = None  # TODO: replace None with your code for the variable 'x'.
     expr = None  # TODO: replace None with the expression x^2 + 3x + 2.
     return None  # TODO: replace None with the derivative of 'expr' with respect to 'x', evaluated at x = 5.
 
 
-# 9. Create the expression: y^x, evaluate its derivative with respect to x at x = 2, y = 3.
-def exercise_9():
+# 10. Create the expression: y^x, evaluate its derivative with respect to x at x = 2, y = 3.
+def exercise_10():
     x = None  # TODO: replace None with your code for the variable 'x'.
     y = None  # TODO: replace None with your code for the variable 'y'.
     return None  # TODO: replace None with a completed expression, differentiated with respect to x, and evaluated at x = 2, y = 3.
 
 
-# 10. Create the expression: ln(x^2 + 1). Evaluate its derivative with respect to x at x = 1.
-def exercise_10():
+# 11. Create the expression: ln(x^2 + 1). Evaluate its derivative with respect to x at x = 1.
+def exercise_11():
     x = None  # TODO: replace None with your code for the variable 'x'.
     return None  # TODO: replace None with a completed expression, differentiated with respect to x, and evaluated at x = 1.
 
@@ -84,10 +90,11 @@ if __name__ == "__main__":
     assert exercise_2().eval({"x": 7}) == 7, f"{exercise_2.__name__} failed"
     assert exercise_3() == 10, f"{exercise_3.__name__} failed"
     assert exercise_4().eval({"x": 3}) == 11, f"{exercise_4.__name__} failed"
-    assert exercise_5().eval({"x": 4}) == 25, f"{exercise_5.__name__} failed"
-    assert exercise_6() == 1106, f"{exercise_6.__name__} failed"
-    assert math.isclose(exercise_7(), 1.0), f"{exercise_7.__name__} failed"
-    assert exercise_8() == 23, f"{exercise_8.__name__} failed"
-    assert math.isclose(exercise_9(), 9.88751059801), f"{exercise_9.__name__} failed"
-    assert math.isclose(exercise_10(), 1.0), f"{exercise_10.__name__} failed"
+    assert exercise_5() == 3, f"{exercise_5.__name__} failed"
+    assert exercise_6().eval({"x": 4}) == 25, f"{exercise_6.__name__} failed"
+    assert exercise_7() == 1106, f"{exercise_7.__name__} failed"
+    assert math.isclose(exercise_8(), 1.0), f"{exercise_8.__name__} failed"
+    assert exercise_9() == 23, f"{exercise_9.__name__} failed"
+    assert math.isclose(exercise_10(), 9.88751059801), f"{exercise_10.__name__} failed"
+    assert math.isclose(exercise_11(), 1.0), f"{exercise_11.__name__} failed"
     print("All tests passed!")
