@@ -43,27 +43,33 @@ class artificial_neural_net:
         for i in range(n_in):
             for h in range(n_hl):
                 weight_name = (
-                    None  # TODO: Give your input-hidden layer weights appropriate names
+                    # TODO: Give your input-hidden layer weights appropriate names
+                    f'w_in_{i}_{h}'
                 )
                 self.weights[weight_name] = (
-                    None  # TODO: Initialize your weights as autodiff expressions
+                    # TODO: Initialize your weights as autodiff expressions
+                    autodiff.expression(weight_name)
                 )
 
         # Hidden to output layer weights
         for h in range(n_hl):
             weight_name = (
-                None  # TODO: Give your hidden-output layer weights appropriate names
+                # TODO: Give your hidden-output layer weights appropriate names
+                f'w_h_{h}'
             )
             self.weights[weight_name] = (
-                None  # TODO: Initialize your weights as autodiff expressions
+                # TODO: Initialize your weights as autodiff expressions
+                autodiff.expression(weight_name)
             )
 
         # initialize biases
-        for h in range(n_hl):
-            bias_name = None  # TODO: Give your hidden layer biases appropriate names
-            self.biases[bias_name] = (
-                None  # TODO: Initialize your biases as an autodiff expression
-            )
+        bias_name = f'b_i' # Give input layer bias approriate name
+        self.biases[bias_name] = autodiff.expression(bias_name)
+        bias_name = f'b_h' # TODO: Give your hidden layer biases appropriate names
+        self.biases[bias_name] = (
+            # TODO: Initialize your biases as an autodiff expression
+            autodiff.expression(bias_name)
+        )
 
     def feedforward(self, X):
         """Feedforward function.
@@ -78,9 +84,9 @@ class artificial_neural_net:
         # Input-hidden
         hidden_outputs = []
         for h in range(self.n_hl):
-            weighted_sum = None  # TODO: Set initial value of weighted_sum
+            weighted_sum = 0  # TODO: Set initial value of weighted_sum
             for i in range(self.n_in):
-                weighted_sum = None  # TODO: Add contribution from each input node to the hidden node
+                weighted_sum += self.inputs[f'x_{i}'] * self.weights[f'w_in_{i}_{h}'] # TODO: Add contribution from each input node to the hidden node
 
             # Apply activation function
             if self.hl_af == "sigmoid":
@@ -99,12 +105,14 @@ class artificial_neural_net:
         # Hidden-output, including bias terms
         output_expressions = []
         weighted_sum = (
-            None  # TODO: Initialize weighted sum for output node with bias term
+            # TODO: Initialize weighted sum for output node with bias term
+            self.biases[f'b_h']
         )
 
         for h in range(self.n_hl):
-            weighted_sum = (
-                None  # TODO: Add contribution from each hidden node to the output node
+            weighted_sum += (
+                # TODO: Add contribution from each hidden node to the output node
+                hidden_outputs[h] * self.weights[f'w_h_{h}']
             )
 
         # Apply activation function
