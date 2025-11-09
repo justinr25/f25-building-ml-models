@@ -182,14 +182,16 @@ class neuralnet:
         # Gradients with respect to weights
         for weight_name in self.weights:
             gradients[weight_name] = (
-                None  # TODO: differentiate the loss expression with respect to each weight
+                # TODO: differentiate the loss expression with respect to each weight
+                loss_expr.diff(values_dict, weight_name)
             )
             # HINT: you've already created the loss function -- you just need to differentiate.
 
         # Gradients with respect to biases
         for bias_name in self.biases:
             gradients[bias_name] = (
-                None  # TODO: differentiate loss expression with respect to the bias term.
+                # TODO: differentiate loss expression with respect to the bias term.
+                loss_expr.diff(values_dict, bias_name)
             )
 
         # Return the created dictionary of gradient values.
@@ -216,20 +218,21 @@ class neuralnet:
 
         # Forward pass
         output_expression = (
-            None  # TODO: implement a single pass of the feedforward algorithm.
+            # TODO: implement a single pass of the feedforward algorithm.
+            self.feedforward(X)
         )
         # HINT: we made a function to do this last meeting, which you can call here.
 
         # Compute loss
-        loss_expr = None  # TODO: create an expression for the loss by calling a function from above.
-        loss_value = None  # TODO: evaluate the expression (loss_expr) you just made with a method call.
+        loss_expr = self.compute_loss(y_true, output_expression, values_dict) # TODO: create an expression for the loss by calling a function from above.
+        loss_value = loss_expr.eval(values_dict)  # TODO: evaluate the expression (loss_expr) you just made with a method call.
 
         # Backward pass
-        gradients = None  # TODO: compute gradients using backpropogation.
+        gradients = self.backpropagate(y_true, output_expression, values_dict)  # TODO: compute gradients using backpropogation.
 
         # Update parameters using gradient descent
         for param_name in gradients:
-            values_dict[param_name] -= None  # TODO: update our parameters.
+            values_dict[param_name] -= gradients[param_name] * learning_rate  # TODO: update our parameters.
             # HINT: we want to use the gradient values, multiplied by another value to adjust the rate of learning.
 
         return loss_value, values_dict
@@ -256,6 +259,13 @@ class neuralnet:
         # TODO: repeatedly call train_step, which will update your weights and biases and train the network.
         # HINT: when you call train_step, you'll use values_dict (created in this function) as an input.
         # HINT: You might want to print the total loss each 100 or so epochs to understand training progress better.
+        for epoch in range(1, epochs+1):
+            for input, target in training_data:
+                loss_value, values_dict = self.train_step(input, target, values_dict, learning_rate)
+                loss_history.append(loss_value)
+
+            if verbose and epoch % 100 == 0:
+                print(f'{epoch=}, {loss_value=}')
 
         return values_dict, loss_history
 
